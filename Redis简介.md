@@ -2568,7 +2568,7 @@ redis-sentinel /root/redis-4.0.0/conf/sentinel-26381.conf
 
 ### 3、故障转移阶段
 
-![image-20201116201549669](.\Redis简介.assets\image-20201116201549669.png)
+![image-20201116201549669](./Redis简介.assets/image-20201116201549669.png)
 
 1. 哨兵1多次ping master没有反应的话，哨兵会把master里的sentinelredisinstance标记flags：SRI_S_DOWN（主观下线）。
 2. 然后在内网中发布指令 sentinel is...... （如果是哨兵断了，指令是不会被发送的。）
