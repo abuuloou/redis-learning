@@ -2545,9 +2545,9 @@ redis-sentinel /root/redis-4.0.0/conf/sentinel-26381.conf
 
 ### 1、监控阶段
 
-![image-20201116195647676](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116195647676.png)
+![image-20201116195647676](.\Redis简介.assets\image-20201116195647676.png)
 
-![image-20201116195741459](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116195741459.png)
+![image-20201116195741459](.\Redis简介.assets\image-20201116195741459.png)
 
 1. 一个哨兵被启动了，首先连接master（发送info+建立cmd连接用于发送指令）sentinel记录哨兵端信息，master记录redis实例的信息。
 2. 然后从SentinelRedisInstance获得slave信息，连接slave，info指令+建立cmd。
@@ -2560,7 +2560,7 @@ redis-sentinel /root/redis-4.0.0/conf/sentinel-26381.conf
 
 ### 2、通知阶段
 
-![image-20201116201118559](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116201118559.png)
+![image-20201116201118559](.\Redis简介.assets\image-20201116201118559.png)
 
 
 
@@ -2568,7 +2568,7 @@ redis-sentinel /root/redis-4.0.0/conf/sentinel-26381.conf
 
 ### 3、故障转移阶段
 
-![image-20201116201549669](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116201549669.png)
+![image-20201116201549669](.\Redis简介.assets\image-20201116201549669.png)
 
 1. 哨兵1多次ping master没有反应的话，哨兵会把master里的sentinelredisinstance标记flags：SRI_S_DOWN（主观下线）。
 2. 然后在内网中发布指令 sentinel is...... （如果是哨兵断了，指令是不会被发送的。）
@@ -2576,7 +2576,7 @@ redis-sentinel /root/redis-4.0.0/conf/sentinel-26381.conf
 
 ****
 
-![image-20201116201730394](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116201730394.png)
+![image-20201116201730394](.\Redis简介.assets\image-20201116201730394.png)
 
 发送信息+参选+投票  sentinel发现先收到哪个sentinel给那个投票【选出来一个sentinel来当代表】，被选出来的sentinel代表来处理转移故障 找备选master
 
@@ -2639,9 +2639,9 @@ redis-sentinel /root/redis-4.0.0/conf/sentinel-26381.conf
 - 将所有的存储空间计划切割成16384份（一份是一个槽），每台主机保存一部分 ：每份代表的是一个槽，不是一个key的保存空间 【比方说通过算法得到key应该存在37存储空间，那么key就放到计算机37号”公寓“，具体哪个房间再放，先找公寓再找房子】
 - 将key按照计算出的结果放到对应的存储空间
 
-![image-20201116204413654](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116204413654.png)
+![image-20201116204413654](.\Redis简介.assets\image-20201116204413654.png)
 
-![image-20201116204458351](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116204458351.png)
+![image-20201116204458351](.\Redis简介.assets\image-20201116204458351.png)
 
 
 
@@ -2651,7 +2651,7 @@ redis-sentinel /root/redis-4.0.0/conf/sentinel-26381.conf
 
 如果减少一个节点：把槽归还给原来的机器
 
-![image-20201116204708322](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116204708322.png)
+![image-20201116204708322](.\Redis简介.assets\image-20201116204708322.png)
 
 
 
@@ -2659,7 +2659,7 @@ redis-sentinel /root/redis-4.0.0/conf/sentinel-26381.conf
 
 通过key可以找到对应的存储槽：如果在11~20。先找A发现A没有，然后通过A里的编号，可以找到11~22在B存储空间。那就去B找，最多两次。
 
-![image-20201116205114576](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116205114576.png)、
+![image-20201116205114576](.\Redis简介.assets\image-20201116205114576.png)、
 
 
 
@@ -2793,7 +2793,7 @@ redis-cli   [-p]  ——不会自动转槽
 
 从下线再上线的主（6382下线了，然后又上线了，主同意他的同步请求）
 
-![image-20201116212631104](D:\Users\XL\176文件\大三下\笔记\Progressing\redis\Redis简介.assets\image-20201116212631104.png)
+![image-20201116212631104](.\Redis简介.assets\image-20201116212631104.png)
 
 其他主（清除6379他家的破事记录）
 
